@@ -130,6 +130,8 @@ public class login {
 		lblNewLabel_2.setText("登陆错误提示语");
 		new Label(loginShell, SWT.NONE);
 		new Label(loginShell, SWT.NONE);
+		//  
+		
 
 		Button btnNewButton = new Button(loginShell, SWT.NONE);
 		GridData gd_btnNewButton = new GridData(SWT.LEFT, SWT.CENTER, false,

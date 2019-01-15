@@ -30,7 +30,8 @@ public class login {
 	public static Text userNameText; // 用户名
 	public static Text passWordText; // 用户密码
 	public static Text voliCodeText;
-	public static Label lblNewLabel_1;
+	private Label lblNewLabel_1;
+	private Label lblNewLabel_4;
 
 	/**
 	 * Launch the application.
@@ -99,35 +100,30 @@ public class login {
 				false, 1, 1));
 		lblNewLabel.setText("请使用门店账号登陆：");
 		new Label(loginShell, SWT.NONE);
-		new Label(loginShell, SWT.NONE);
+		
+		lblNewLabel_1 = new Label(loginShell, SWT.NONE);
+		lblNewLabel_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblNewLabel_1.setText("门店账号");
 
 		userNameText = new Text(loginShell, SWT.BORDER);
 		userNameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
 		userNameText.setToolTipText("");
 		new Label(loginShell, SWT.NONE);
-		new Label(loginShell, SWT.NONE);
+		
+		lblNewLabel_4 = new Label(loginShell, SWT.PASSWORD);
+		lblNewLabel_4.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblNewLabel_4.setText("密码");
 
 		passWordText = new Text(loginShell, SWT.BORDER);
 		passWordText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
-		new Label(loginShell, SWT.NONE);
-		new Label(loginShell, SWT.NONE);
-
-		lblNewLabel_1 = new Label(loginShell, SWT.NONE);
-		lblNewLabel_1.setText("验证码图片");
-		lblNewLabel_1.setImage(new Image(Display.getDefault(), "d:\\test.jpeg"));
 
 		new Label(loginShell, SWT.NONE);
 		new Label(loginShell, SWT.NONE);
 
 		voliCodeText = new Text(loginShell, SWT.BORDER);
 		voliCodeText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		new Label(loginShell, SWT.NONE);
-		new Label(loginShell, SWT.NONE);
-
-		Label lblNewLabel_2 = new Label(loginShell, SWT.NONE);
-		lblNewLabel_2.setText("登陆错误提示语");
 		new Label(loginShell, SWT.NONE);
 		new Label(loginShell, SWT.NONE);
 		//  
@@ -215,15 +211,14 @@ public class login {
 	public static  void userLogin(String username, String password, String valicode)
 			throws Exception {
 
-		String url_str = "http://mch.hizpay.com/api/ysmerchant/login";//
+		String url_str = "http://localhost:8180/api/speech/login?";//
 		URL url = new URL(url_str);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection.connect();
 		try {
 			StringBuffer requestParam = new StringBuffer();
-			requestParam.append("validate_code=").append(valicode)
-					.append("&username=").append(username)
-					.append("&password=").append(password);
+			requestParam.append("account=").append(username)
+				    	.append("&password=").append(password);
 			System.out.println("requestsTR:" + requestParam.toString());
 			System.out.println("requestsTR:" + url_str);
 			String response = getData(url_str, requestParam.toString());

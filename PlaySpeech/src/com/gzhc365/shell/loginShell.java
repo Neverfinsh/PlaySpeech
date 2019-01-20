@@ -77,16 +77,13 @@ public class loginShell {
 
 	/** 界面布局： 类似于HTML **/
 	protected void createContents(Display display) {
+		
 		loginShell = new Shell(display, SWT.SHELL_TRIM ^ SWT.MAX);
 		loginShell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		loginShell.setSize(472, 554);
 		loginShell.setText("门店用户登陆");
-		
-		Image img = new Image(display, this.getClass().getResourceAsStream("/image/favicon.png"));
-	//    new Image(display, this.getClass.getResourceAsStream("/image/favicon.png"))  ;
-//		loginShell.setImage(SWTResourceManager
-//				.getImage("C:\\Users\\liuwu\\Desktop\\favicon.png"));
-	    loginShell.setImage(img);
+		Image image = new Image(Display.getCurrent(),"image/favicon.png");
+		loginShell.setImage(image);
 		loginShell.setLayout(new GridLayout(3, false));
 		new Label(loginShell, SWT.NONE);
 		new Label(loginShell, SWT.NONE);
@@ -95,8 +92,9 @@ public class loginShell {
 		new Label(loginShell, SWT.NONE);
 
 		lblNewLabel_1 = new Label(loginShell, SWT.NONE);
-		lblNewLabel_1.setImage(SWTResourceManager
-				.getImage("C:\\Users\\liuwu\\Desktop\\logo.png"));
+		Image logoImage = new Image(Display.getCurrent(),"image/logo.png");
+		lblNewLabel_1.setImage(logoImage);
+		
 		new Label(loginShell, SWT.NONE);
 		new Label(loginShell, SWT.NONE);
 
@@ -138,7 +136,7 @@ public class loginShell {
 		passWordText.setLayoutData(gd_passWordText);
 		new Label(loginShell, SWT.NONE);
 		new Label(loginShell, SWT.NONE);
-		
+		// 提醒语
 		lblNewLabel_2 = new Label(loginShell, SWT.NONE);
 		lblNewLabel_2.setText("提醒语");
 		new Label(loginShell, SWT.NONE);

@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.SWT;
@@ -54,31 +55,8 @@ public class mainShell {
 		}
 		
 	}
-
-	public  static boolean conSpeechServer(){
-	    ClientBootstrap bootstrap = new ClientBootstrap();
-        ExecutorService boss = Executors.newCachedThreadPool();
-        ExecutorService work = Executors.newCachedThreadPool();
-        bootstrap.setFactory(new NioClientSocketChannelFactory(boss, work));
-        
-        bootstrap.setPipelineFactory(new ChannelPipelineFactory() {
-            public ChannelPipeline getPipeline() throws Exception {
-                ChannelPipeline pipelinea = Channels.pipeline();
-                pipelinea.addLast("encoder", new StringEncoder());
-                pipelinea.addLast("decoder", new StringDecoder());
-                pipelinea.addLast("hiClientHandler", new ClientHiHandler());
-                return pipelinea;
-            }
-        });
-        // 连接服务器端的
-        ChannelFuture channelFuture = bootstrap.connect(new InetSocketAddress("localhost", 7777));
-        Channel channel = channelFuture.getChannel();
-        System.out.println("连接......");
-        channel.write("netty客户端连接了！");
-		return true;
-	}
 	
-	// TODO: 1 图标设置通过代码获取 
+	
 	/** 构建页面要数**/
 	protected static  void createContents(String  shopInfoJson) {
 		//  对字符串进行解析，查出页面要数
@@ -89,7 +67,9 @@ public class mainShell {
 		shell.setSize(630, 490);
 		shell.setText("海鹚语音助手");
 		shell.setLayout(new GridLayout(4, false));
-		shell.setImage(SWTResourceManager.getImage("C:\\Users\\liuwu\\Desktop\\favicon.png"));
+		Image image = new Image(Display.getCurrent(),"image/favicon.png");
+		
+		shell.setImage(image);
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
@@ -126,7 +106,9 @@ public class mainShell {
 		new Label(shell, SWT.NONE);
 		
 		Label label = new Label(shell, SWT.NONE);
-		label.setImage(SWTResourceManager.getImage("C:\\Users\\liuwu\\Desktop\\u1032.png"));
+		Image image1 = new Image(Display.getCurrent(),"image/u1032.png");
+		//label.setImage(SWTResourceManager.getImage("C:\\Users\\liuwu\\Desktop\\u1032.png"));
+	    label.setImage(image1);
 		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
@@ -138,7 +120,9 @@ public class mainShell {
 		gd_lblHizpay.widthHint = 379;
 		lblHizpay.setLayoutData(gd_lblHizpay);
 		lblHizpay.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblHizpay.setImage(SWTResourceManager.getImage("C:\\Users\\liuwu\\Desktop\\logo.png"));
+	//	lblHizpay.setImage(SWTResourceManager.getImage("C:\\Users\\liuwu\\Desktop\\logo.png"));
+		Image image2 = new Image(Display.getCurrent(),"image/logo.png");
+		lblHizpay.setImage(image2);
 		lblHizpay.setText("HizPay语音助手接受支付订单中..........");
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
@@ -151,7 +135,9 @@ public class mainShell {
 		gd_lblNewLabel_2.widthHint = 358;
 		lblNewLabel_2.setLayoutData(gd_lblNewLabel_2);
 		lblNewLabel_2.setAlignment(SWT.CENTER);
-		lblNewLabel_2.setImage(SWTResourceManager.getImage("D:\\LocalGit\\PlaySpeech\\image\\u1017.png"));
+      //lblNewLabel_2.setImage(SWTResourceManager.getImage("D:\\LocalGit\\PlaySpeech\\image\\u1017.png"));
+		Image image3 = new Image(Display.getCurrent(),"image/u1017.png");
+		lblNewLabel_2.setImage(image3);
 		lblNewLabel_2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);

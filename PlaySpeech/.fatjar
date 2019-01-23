@@ -1,12 +1,12 @@
 #Fat Jar Configuration File
-#Sat Jan 19 20:47:10 CST 2019
+#Thu Jan 24 01:27:52 CST 2019
 onejar.license.required=false
 manifest.classpath=
 manifest.removesigners=true
 onejar.checkbox=true
 jarname=speech.jar
 manifest.mergeall=true
-manifest.mainclass=com.gzhc365.login.loginShell
+manifest.mainclass=com.gzhc365.shell.LoginShell
 manifest.file=<createnew>
 jarname.isextern=false
 onejar.expand=

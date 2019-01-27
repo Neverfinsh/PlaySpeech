@@ -17,7 +17,7 @@ public class PlayVoice {
 		if (type == 0) {
 			try {         // 音量 0-100
 				sap.setProperty("Volume", new Variant(100)); // 语音朗读速度 -10 到 +10
-				sap.setProperty("Rate", new Variant(1.3));
+				sap.setProperty("Rate", new Variant(1.0));
 				Variant defalutVoice = sap.getProperty("Voice");
 				Dispatch dispdefaultVoice = defalutVoice.toDispatch();
 				Variant allVoices = Dispatch.call(sapo, "GetVoices");
@@ -61,15 +61,5 @@ public class PlayVoice {
 		}
 		new PlayVoice().strat(channelName+reallyMoney+"元", 0);
 	}
-	/**
-	 * 
-	 * @param
-	 * @throws MalformedURLException
-	 * @throws InterruptedException
-	 */
-	public static void main(String[] args) throws MalformedURLException,
-			InterruptedException {
-		     new PlayVoice().strat("支付宝到账101909.54元", 0);
-	}
-
+	
 }

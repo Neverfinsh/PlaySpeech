@@ -39,7 +39,7 @@ public class LoginShell {
 	public static void main(String[] args) {
 		try {
 			LoginShell window = new LoginShell();
-			window.open();
+			window.open();  
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -150,6 +150,7 @@ public class LoginShell {
 					setDefault();
 					return;
 				}
+				
 				if(password==""||password.length()==0 ){
 					MessageDialog("密码不能为空");
 					setDefault();
@@ -197,7 +198,7 @@ public class LoginShell {
 		}
 	}
 
-	/** 弹出一个对话框 **/
+	 
 	public static void MessageDialog(String errMsg) {
 		MessageBox dialog = new MessageBox(loginShell, SWT.OK
 				| SWT.ICON_INFORMATION);
@@ -211,4 +212,7 @@ public class LoginShell {
 		passWordText.setText("");
 		btnNewButton.setText("登陆");
 	}
+	
+	
+	
 }

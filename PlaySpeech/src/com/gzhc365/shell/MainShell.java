@@ -5,27 +5,36 @@ import net.sf.json.JSONObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.events.ShellAdapter;
+import org.eclipse.swt.events.ShellEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tray;
 import org.eclipse.swt.widgets.TrayItem;
 import org.eclipse.wb.swt.SWTResourceManager;
+
+import com.gzhc365.nettyclient.Client;
 
 
 public class MainShell {
 	
 	public static  Shell shell;   // 定义一个shell 窗口对象;
 	static Display display ;
+	static MainShell  windowMain ;
+	static Client client;
+	
 	/**1 打开窗口  **/
 	public static void  openMainWindown(String shopInfoJson){
 		LoginShell.colseWindown();
-		MainShell  windowMain = new MainShell();
+	    windowMain = new MainShell();
 		windowMain.open(shopInfoJson);
+		client=new Client();
 	}
 	
 	/** 打开窗口**/
@@ -42,7 +51,16 @@ public class MainShell {
 		
 	}
 	
-	
+	// 结束释放资源
+	public void releaseResource() {
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+			public void run() {
+			}
+		}));
+		Runtime.getRuntime().removeShutdownHook(new Thread());
+		System.exit(1);
+	}
+
 	/** 构建页面要数**/
 	protected static  void createContents(String  shopInfoJson) {
 		//  对字符串进行解析，查出页面要数
@@ -108,7 +126,7 @@ public class MainShell {
 		lblHizpay.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		Image image2 = new Image(Display.getCurrent(),"image/logo.png");
 		lblHizpay.setImage(image2);
-		lblHizpay.setText("HizPay语音助手接受支付订单中..........");
+		lblHizpay.setText("HizPay语音助手接收支付订单中..........");
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
@@ -147,17 +165,16 @@ public class MainShell {
 		btnNewButtonColse.addSelectionListener(new SelectionListener() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-     		//	loginShell.colseWindown();
 				Display display = Display.getDefault();
-     			//shell.close();
      			while (!shell.isDisposed()) {
      				if (!display.readAndDispatch()) {
-     					display.sleep();
+     				  display.sleep();
      					shell.close();
+     					windowMain.releaseResource();
+     					System.exit(0);
      				}
      			}
 			}
-			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
 				
@@ -165,8 +182,20 @@ public class MainShell {
 		});
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
-		new Label(shell, SWT.NONE);;
-
+		new Label(shell, SWT.NONE);
+//		shell.addShellListener(new ShellAdapter() {
+//			public void shellClosed(ShellEvent e) {
+//				MessageBox messagebox = new MessageBox(shell, SWT.ICON_WARNING
+//						| SWT.YES | SWT.NO );
+//				messagebox.setText("退出");
+//				messagebox.setMessage("您确定要退出吗?");
+//				int message = messagebox.open();
+//				if(message == SWT.YES){
+//					System.exit(0);
+//					windowMain.releaseResource();
+//				}
+//			}
+//		});
 	}
 
 }

@@ -10,7 +10,6 @@ public class MoneyUtils {
 			return "0.00";
 		}
 		DecimalFormat format = new DecimalFormat("0.00");
-		return format.format(BigDecimal.valueOf(money)
-				.divide(BigDecimal.valueOf(100)).doubleValue());
+		return format.format(BigDecimal.valueOf(money).divide(BigDecimal.valueOf(100)).doubleValue());
 	}
 }

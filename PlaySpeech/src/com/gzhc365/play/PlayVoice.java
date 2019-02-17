@@ -1,9 +1,11 @@
 package com.gzhc365.play;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
 
 import net.sf.json.JSONObject;
 
+import com.gzhc365.baidutts.BaiduTtsMain;
+import com.gzhc365.utils.DemoException;
 import com.gzhc365.utils.MoneyUtils;
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
@@ -46,20 +48,33 @@ public class PlayVoice {
 			}
 		}
 	}
-
+	
 	public static void dealOrderMqMes(String jsonStr) {
 		JSONObject MesgJson = JSONObject.fromObject(jsonStr);
-		String channel="";
-		String channelName="";
-		String money=MesgJson.get("totalPayFee").toString();
-		channel=MesgJson.get("payChannel").toString();
-		String reallyMoney=MoneyUtils.formatToYuan(Integer.parseInt(money));
-		if(channel.contains("weixin")){
-			 channelName="微信到账";
-		}else{
-			 channelName="支付宝到账";
+		String channel = "";
+		String channelName = "";
+		String money = MesgJson.get("totalPayFee").toString();
+		channel = MesgJson.get("payChannel").toString();
+		String reallyMoney = MoneyUtils.formatToYuan(Integer.parseInt(money));
+		if (channel.contains("weixin")) {
+			channelName = "微信到账";
+		} else {
+			channelName = "支付宝到账";
 		}
-		new PlayVoice().strat(channelName+reallyMoney+"元", 0);
+		// new PlayVoice().strat(channelName+reallyMoney+"元", 0);
+		String soundStr = channelName + reallyMoney + "元";
+		String soundPathHttp;
+		try {
+			soundPathHttp = (new BaiduTtsMain()).createSoundPathHttp(soundStr);
+			BaiduPlayVoice.playAudio(soundPathHttp);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DemoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
-	
+
 }
